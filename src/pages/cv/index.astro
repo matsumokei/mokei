@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 
-const HITACHI_ERA_DETAIL_URL = '/blog/from-physics-to-hitachi/';
+const HITACHI_ERA_DETAIL_URL = '/blog/career/from-physics-to-hitachi/';
 
 const hitachiProjects = [
   {
@@ -39,15 +39,18 @@ const careerItems = [
     projects: hitachiProjects,
   },
   {
-    date: '2021-04',
-    title: 'Quantum Computing Researcher at AIST',
-    description: 'Matsuzaki Team. National Institute of Advanced Industrial Science and Technology.',
-  },
-  {
     date: '2022-07',
     title: 'Intern at Japan Atomic Energy Agency (JAEA)',
     description: 'Kashiwa. Mentor: Yuki Nagai.',
   },
+  {
+    date: '2021-04',
+    title: 'Quantum Computing Researcher at AIST',
+    description: 'Matsuzaki Team. National Institute of Advanced Industrial Science and Technology.',
+  },
+];
+
+const educationItems = [
   {
     date: '2021-04',
     title: 'Master degree Physics at Tokyo University of Science',
@@ -139,68 +142,99 @@ const presentationsJa = [
 ---
 
 <Layout title="CV — Keisuke's Notes" description="Curriculum Vitae of Keisuke Matsumoto">
-  <article class="post cv">
-    <h1>Curriculum Vitae</h1>
-    <p class="post-meta">Keisuke Matsumoto — Software Developer and Researcher</p>
+  <article class="post cv" lang="en">
+    <h1>Keisuke Matsumoto</h1>
+    <p class="post-meta">Software Developer and Researcher</p>
 
-    <h2>Career</h2>
-    <ul class="cv-list">
-      {careerItems.map((item) => (
-        <li>
-          <span class="cv-date">{item.date}</span>
-          <strong>{item.title}</strong>
-          <p>{item.description}</p>
-          {item.projects && (
-            <>
-              <p class="cv-subheading">Projects</p>
-              <ul class="cv-sublist">
-                {item.projects.map((project) => (
-                  <li>
-                    <strong>{project.title}</strong>
-                    <p class="cv-meta">{project.period}</p>
-                    {project.tech && <p class="cv-meta">{project.tech}</p>}
-                  </li>
-                ))}
-              </ul>
-            </>
-          )}
-          {item.detailUrl && <p class="cv-meta"><a href={item.detailUrl}>details →</a></p>}
-        </li>
-      ))}
-    </ul>
+    <nav class="cv-nav" aria-label="CV sections">
+      <a href="#career">Career</a>
+      <a href="#education">Education</a>
+      <a href="#publications">Publications</a>
+      <a href="#presentations">Presentations</a>
+    </nav>
 
-    <h2>Publications</h2>
-    <ul class="cv-list">
-      {publications.map((pub) => (
-        <li>
-          <a href={pub.url} target="_blank" rel="noopener noreferrer">{pub.title}</a>
-          <p class="cv-meta">{pub.year}</p>
-        </li>
-      ))}
-    </ul>
+    <section id="career" aria-labelledby="career-heading">
+      <h2 id="career-heading">Career</h2>
+      <ul class="cv-list">
+        {careerItems.map((item) => (
+          <li>
+            <time class="cv-date" datetime={item.date}>{item.date}</time>
+            <div class="cv-entry">
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+              {item.detailUrl && <p class="cv-meta"><a href={item.detailUrl}>Career background</a></p>}
+              {item.projects && (
+                <details class="cv-projects">
+                  <summary>Projects ({item.projects.length})</summary>
+                  <ul class="cv-sublist">
+                    {item.projects.map((project) => (
+                      <li>
+                        <h4>{project.title}</h4>
+                        <p class="cv-meta">{project.period}</p>
+                        {project.tech && <p class="cv-meta">{project.tech}</p>}
+                      </li>
+                    ))}
+                  </ul>
+                </details>
+              )}
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
 
-    <h2>Presentations (English)</h2>
-    <ul class="cv-list">
-      {presentationsEn.map((pres) => (
-        <li>
-          {pres.url
-            ? <a href={pres.url} target="_blank" rel="noopener noreferrer">{pres.title}</a>
-            : <strong>{pres.title}</strong>}
-          <p class="cv-meta">{pres.conference} @{pres.location} ({pres.year})</p>
-        </li>
-      ))}
-    </ul>
+    <section id="education" aria-labelledby="education-heading">
+      <h2 id="education-heading">Education</h2>
+      <ul class="cv-list">
+        {educationItems.map((item) => (
+          <li>
+            <time class="cv-date" datetime={item.date}>{item.date}</time>
+            <div class="cv-entry">
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
 
-    <h2>Presentations (Japanese)</h2>
-    <ul class="cv-list">
-      {presentationsJa.map((pres) => (
-        <li>
-          {pres.url
-            ? <a href={pres.url} target="_blank" rel="noopener noreferrer">{pres.title}</a>
-            : <strong>{pres.title}</strong>}
-          <p class="cv-meta">{pres.conference} @{pres.location} ({pres.year})</p>
-        </li>
+    <section id="publications" aria-labelledby="publications-heading">
+      <h2 id="publications-heading">Publications</h2>
+      <ul class="cv-list">
+        {publications.map((pub) => (
+          <li>
+            <time class="cv-date" datetime={String(pub.year)}>{pub.year}</time>
+            <div class="cv-entry">
+              <a href={pub.url} target="_blank" rel="noopener noreferrer">{pub.title}</a>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section id="presentations" aria-labelledby="presentations-heading">
+      <h2 id="presentations-heading">Presentations</h2>
+      {[
+        { language: 'English', lang: 'en', items: presentationsEn },
+        { language: 'Japanese', lang: 'ja', items: presentationsJa },
+      ].map((group) => (
+        <>
+          <h3 class="cv-language">{group.language}</h3>
+          <ul class="cv-list" lang={group.lang}>
+            {group.items.map((pres) => (
+              <li>
+                <time class="cv-date" datetime={String(pres.year)}>{pres.year}</time>
+                <div class="cv-entry">
+                  {pres.url
+                    ? <a href={pres.url} target="_blank" rel="noopener noreferrer">{pres.title}</a>
+                    : <span>{pres.title}</span>}
+                  <p class="cv-meta">{pres.conference} · {pres.location}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </>
       ))}
-    </ul>
+    </section>
   </article>
 </Layout>

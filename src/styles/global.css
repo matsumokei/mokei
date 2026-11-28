@@ -263,13 +263,23 @@ article.post table {
   overflow-x: auto;
 }
 
-article.cv h2 {
-  font-size: 1.15rem;
-  margin: 2rem 0 0.75rem;
+article.cv section {
+  margin-top: 2.75rem;
+  scroll-margin-top: 1.5rem;
 }
 
-article.cv h2:first-of-type {
-  margin-top: 2.5rem;
+article.cv h2 {
+  font-size: 1.15rem;
+  margin: 0 0 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.cv-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  font-size: 0.85rem;
 }
 
 ul.cv-list {
@@ -278,24 +288,34 @@ ul.cv-list {
   padding: 0;
 }
 
-ul.cv-list li {
-  margin-bottom: 1rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--rule);
-}
-
-ul.cv-list li:last-child {
-  border-bottom: none;
+ul.cv-list > li {
+  display: grid;
+  grid-template-columns: 5rem minmax(0, 1fr);
+  gap: 1rem;
+  padding: 0.9rem 0;
 }
 
 ul.cv-list .cv-date {
   color: var(--muted);
   font-size: 0.85rem;
-  margin-right: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  padding-top: 0.15rem;
+}
+
+.cv-entry {
+  min-width: 0;
+}
+
+.cv-entry h3,
+.cv-entry h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
 }
 
 ul.cv-list p {
   margin: 0.25rem 0 0;
+  font-size: 0.9rem;
 }
 
 ul.cv-list .cv-meta {
@@ -303,28 +323,48 @@ ul.cv-list .cv-meta {
   font-size: 0.85rem;
 }
 
-.cv-subheading {
-  font-size: 1.05rem;
-  font-weight: bold;
-  color: var(--fg);
-  margin: 1rem 0 0.5rem;
+.cv-projects {
+  margin-top: 0.85rem;
+}
+
+.cv-projects summary {
+  cursor: pointer;
+  color: var(--link);
+  font-size: 0.85rem;
+}
+
+.cv-projects summary:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 4px;
 }
 
 ul.cv-sublist {
   list-style: none;
-  margin: 0;
+  margin: 1rem 0 0;
   padding-left: 1rem;
   border-left: 1px solid var(--rule);
 }
 
 ul.cv-sublist li {
-  margin-bottom: 0.6rem;
-  padding-bottom: 0;
-  border-bottom: none;
+  margin-bottom: 1.25rem;
 }
 
 ul.cv-sublist li:last-child {
   margin-bottom: 0;
+}
+
+article.cv .cv-language {
+  font-size: 0.9rem;
+  font-weight: normal;
+  color: var(--muted);
+  margin: 1.5rem 0 0.25rem;
+}
+
+@media (max-width: 600px) {
+  ul.cv-list > li {
+    grid-template-columns: 1fr;
+    gap: 0.2rem;
+  }
 }
 
 article.post pre {
