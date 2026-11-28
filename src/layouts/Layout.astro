@@ -32,7 +32,7 @@ const toc = headings.filter((h) => h.depth <= 3);
     <div class="site">
       <header class="site-title">
         <h1><a href="/">Keisuke's Notes</a></h1>
-        <nav class="site-nav">
+        <nav class="site-nav" aria-label="メインナビゲーション">
           <a href="/" aria-current={pathname === '/' ? 'page' : undefined}>Blog</a>
           <a href="/note/" aria-current={pathname.startsWith('/note/') || pathname.startsWith('/category/') ? 'page' : undefined}>Note</a>
           <a href="/about/" aria-current={pathname === '/about/' ? 'page' : undefined}>About</a>
@@ -61,12 +61,12 @@ const toc = headings.filter((h) => h.depth <= 3);
             ソフトウェアエンジニアです。仕事で考えたこと、作ったもの、読んだものについて書いています。
             意見はすべて個人のものです。
           </p>
-          <p><a href="/about/">もう少し詳しく →</a></p>
+          <p><a href="/about/">もう少し詳しく</a></p>
 
           <h2>Links</h2>
           <p>
             <a href="/rss.xml">RSS Feed</a><br />
-            <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://github.com/matsumokei" target="_blank" rel="noopener">GitHub</a>
           </p>
         </aside>
 
@@ -76,7 +76,7 @@ const toc = headings.filter((h) => h.depth <= 3);
       </div>
 
       <footer class="site-footer">
-        <p>&copy; {new Date().getFullYear()} Keisuke Matsumoto. Built with Astro.</p>
+        <p>&copy; {new Date().getFullYear()} Keisuke Matsumoto</p>
       </footer>
     </div>
   </body>
